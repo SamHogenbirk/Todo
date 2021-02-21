@@ -7,7 +7,7 @@ const refs = {
     checkBox: document.getElementsByClassName("check"),
     delete: document.getElementsByClassName("delete-button"),
     submit: document.getElementById("submit"),
-    textInput: document.getElementById("input")
+    textInput: document.getElementById("taskinput")
 };
 
 // Load all task on pageload 
