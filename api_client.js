@@ -11,16 +11,16 @@ const error = (err) => {
 const postNewTask = async (input) => {
 
     try {
-        
-        let data = { description: input, done: false }
 
-        await fetch(apiUrl, {
+        const data = { description: input, done: false }
+
+        const res = await fetch(apiUrl, {
 
             method: "POST",
             body: JSON.stringify(data),
-            headers: { "Content-Type": "application/json" }
+            headers: myHeaders
         })
-
+        return res.json()
     }
     catch (err) {
 
@@ -93,11 +93,11 @@ const updateTask = async (id, input) => {
     }
 };
 
-const deleteTask = async (id) => {
+const deleteTask = (id) => {
 
     try {
 
-        const res = await fetch(apiUrl + id, {
+        fetch(apiUrl + id, {
 
             method: "delete"
         })
