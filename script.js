@@ -1,4 +1,4 @@
-let log = console.log
+const log = console.log
 
 // HTML references
 const refs = {
@@ -11,9 +11,9 @@ const refs = {
 };
 
 // Load all task on pageload 
-let LoadAllTasks = async () => {
+const LoadAllTasks = () => {
 
-    let res = await getTasks()
+    getTasks()
         .then(data => {
 
             log(data)
@@ -23,14 +23,13 @@ let LoadAllTasks = async () => {
                 // check boxes of checkbox value is true
                 if (item.done === true) {
 
-                    let x = document.getElementById(`${item._id}`)
-                    x.firstChild.checked = true
-                    x.firstChild.nextSibling.classList.add('checked')
+                    const checkTrue = document.getElementById(`${item._id}`)
+                    checkTrue.firstChild.checked = true
+                    checkTrue.firstChild.nextSibling.classList.add('checked')
 
                 }
             })
         })
-    return res
 };
 
 LoadAllTasks()
@@ -63,7 +62,7 @@ const createListItem = (input, id) => {
 };
 
 
-document.addEventListener('click', (e) => {
+document.addEventListener('click', async (e) => {
 
     switch (e.target.id) {
 
@@ -77,9 +76,10 @@ document.addEventListener('click', (e) => {
         // adds task on click event
         case "submit":
 
+
             const input = refs.textInput.value
-            createListItem(input)
-            postNewTask(input)
+            const obj = await postNewTask(input)
+            createListItem(input, obj._id)
             refs.textInput.value = ""
             break;
     }
